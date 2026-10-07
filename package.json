@@ -1,0 +1,18 @@
+{
+  "name": "datacube-ai-news-feed",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cyber Slate Intelligence — desktop news feed for the Data Cube AI News API",
+  "scripts": {
+    "dev": "tauri dev",
+    "start": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.1.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0"
+  }
+}

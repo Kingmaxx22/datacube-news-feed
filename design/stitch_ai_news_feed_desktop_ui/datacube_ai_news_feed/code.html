@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-error": "#690005", "slate-elevated": "#182030", "on-primary-fixed-variant": "#004f53", "badge-tips": "#F59E0B", "inverse-primary": "#00696f", "on-secondary-fixed": "#23005c", "secondary-container": "#571bc1", "secondary-fixed-dim": "#d0bcff", "badge-videos": "#EC4899", "on-surface-variant": "#b9cacb", "on-error-container": "#ffdad6", "on-secondary-fixed-variant": "#5516be", "surface-tint": "#00dce6", "tertiary-fixed-dim": "#7bd0ff", "error-container": "#93000a", "on-secondary": "#3c0091", "badge-trends": "#8B5CF6", "on-tertiary-fixed": "#001e2c", "on-tertiary-container": "#00678c", "slate-surface": "#111622", "outline": "#849495", "on-primary": "#00373a", "surface-container-lowest": "#0b0e15", "tertiary": "#f1f8ff", "status-impact-high": "#EF4444", "secondary-fixed": "#e9ddff", "primary-container": "#00f2fe", "inverse-on-surface": "#2d3038", "surface-variant": "#32353d", "on-surface": "#e1e2ec", "inverse-surface": "#e1e2ec", "tertiary-container": "#b2e1ff", "badge-tech": "#38BDF8", "primary-fixed": "#6ff6ff", "on-primary-fixed": "#002022", "badge-llm": "#00F2FE", "surface-container-highest": "#32353d", "surface-container-low": "#191b23", "status-impact-medium": "#F59E0B", "on-background": "#e1e2ec", "on-tertiary-fixed-variant": "#004c69", "background": "#10131a", "primary": "#e0fdff", "surface": "#10131a", "secondary": "#d0bcff", "surface-container": "#1d1f27", "on-primary-container": "#006a70", "badge-investment": "#10B981", "slate-border": "#222D42", "surface-bright": "#363941", "outline-variant": "#3a494b", "on-tertiary": "#00354a", "primary-fixed-dim": "#00dce6", "tertiary-fixed": "#c4e7ff", "error": "#ffb4ab", "status-impact-low": "#10B981", "surface-dim": "#10131a", "surface-container-high": "#272a32", "on-secondary-container": "#c4abff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-xl": "2.5rem", "gutter": "1.25rem", "gutter-mobile": "0.75rem", "space-lg": "1.5rem", "margin": "2rem", "space-xs": "0.25rem", "space-md": "1rem", "margin-mobile": "1rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-md": [ "Geist" ], "headline-xl": [ "Geist" ], "body-sm": [ "Geist" ], "label-sm": [ "JetBrains Mono" ], "body-md": [ "Geist" ], "label-md": [ "JetBrains Mono" ], "headline-xl-mobile": [ "Geist" ], "headline-lg": [ "Geist" ], "headline-sm": [ "Geist" ], "body-lg": [ "Geist" ], "label-lg": [ "JetBrains Mono" ] }, "fontSize": { "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "headline-xl": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" } ], "label-sm": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" } ], "body-md": [ "14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" } ], "label-md": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-xl-mobile": [ "30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-sm": [ "16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "label-lg": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-slate-surface/90 backdrop-blur-xl border-b border-slate-border"><div class="h-16 w-full px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><img alt="DataCube AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VqWNzNP8REtiY-sPNgjUcMWaEi-tgULdX1u1yhwbDu__K2qbwYAOBnIGX2uSDb8I8aesFKJUIuoN1m975N6K0CSsISRBUQ8GVOvdJkabnGjYhBmrIWxNBGx9m1geoG6CZHe8eUTKeB47pFBepnNq4rCl9MLmVwEFuMwdqxUdSkHk5Y5rbiZR-xVzFi1EFmuAgMM7IBYbbdQO14Q-HE7AJJFMxfh4dEqQzRSXzi6Al3"/><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">DataCube AI News Feed</span><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-high border border-slate-border text-label-sm font-label-sm text-badge-investment"><span class="w-1.5 h-1.5 rounded-full bg-status-impact-low animate-pulse"></span><span>API Connected (v1.2)</span></div></div></div><div class="flex-1 max-w-xl mx-space-sm hidden lg:block"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none">search</span><input class="w-full pl-9 pr-4 py-1.5 bg-surface-container-lowest border border-slate-border rounded text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-badge-llm transition-colors" placeholder="Search AI intelligence across 35+ verified sources (e.g. arXiv, Reddit, DeepSeek)..." type="text"/></div></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden xl:flex items-center bg-surface-container-lowest border border-slate-border rounded p-0.5"><button class="px-2 py-0.5 rounded text-label-sm font-label-sm bg-primary-container text-on-primary-container font-semibold" type="button">EN</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">DE</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">ZH</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">FR</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">ES</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">PT</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">JA</button><button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" type="button">KO</button></div><div class="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-lowest border border-slate-border rounded text-label-sm font-label-sm text-on-surface-variant"><span class="material-symbols-outlined text-sm text-badge-tech">schedule</span><span class="text-outline">Daily:</span><span class="text-primary font-mono">2026-02-26</span><span class="text-outline-variant">|</span><span class="text-outline">Week:</span><span class="text-badge-trends font-mono">2026-kw09</span></div><a class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-slate-elevated border border-slate-border text-label-md font-label-md text-on-surface-variant hover:text-primary hover:border-primary-container transition-all" data-path="api-documentation" href="#"><span class="material-symbols-outlined text-sm">terminal</span><span>API Docs</span></a><div class="flex items-center pl-2 border-l border-slate-border"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-slate-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi1wyD3SxkxStcHUQPiJh5-HthLcodLMS7pAgL5DR-COHcbEnK9IpC7fhxw7wy-sR9rl0x9eqimwFpqZRt5cOcBlCcYm8jhIJdGJr8M8uU9c0j1dR6Mt_E1hJSeFRLUCoMWoK4Uod3wr4WCpehGCIwURmpPewYubc9Caj3FdYs1eqSuJlHMBeVXGgiVVOmy1zRgoXVtIJuJClfRaF_skcza8tGSjg8NHY2mhtCRbI"/></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-slate-surface border-r border-slate-border z-40 flex flex-col justify-between py-space-md"><div class="px-space-md flex flex-col gap-space-lg"><div class="flex flex-col gap-1"><span class="text-label-sm font-label-sm uppercase tracking-wider text-outline px-space-sm">Feeds Navigation</span><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(0,242,254,0.3)]"><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 rounded transition-colors bg-primary-container text-on-primary-container font-semibold shadow-[0_0_12px_rgba(0,242,254,0.3)]" data-path="all-feeds" href="#"><span>All Feeds</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-outline">35+</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="tech-and-models" href="#"><span>Tech &amp; Models</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-badge-tech">/tech</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="investments-and-m-and-a" href="#"><span>Investments &amp; M&amp;A</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-badge-investment">/m&amp;a</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="practical-tips" href="#"><span>Practical Tips</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-badge-tips">/tips</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="video-summaries" href="#"><span>Video Summaries</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-badge-videos">/videos</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="trending-topics" href="#"><span>Trending Topics</span><span class="text-label-sm font-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-badge-trends">/trends</span></a></nav></div><div class="flex flex-col gap-1"><span class="text-label-sm font-label-sm uppercase tracking-wider text-outline px-space-sm">Telemetry</span><div class="p-space-sm bg-surface-container-lowest border border-slate-border rounded flex flex-col gap-2"><div class="flex items-center justify-between text-label-sm font-label-sm"><span class="text-outline">Latency</span><span class="text-badge-investment font-mono">24ms</span></div><div class="flex items-center justify-between text-label-sm font-label-sm"><span class="text-outline">Cluster Nodes</span><span class="text-primary font-mono">6/6 Active</span></div><div class="w-full bg-slate-border h-1 rounded-full overflow-hidden"><div class="bg-primary-container h-full w-5/6"></div></div></div></div></div><div class="px-space-md pt-space-sm border-t border-slate-border flex flex-col gap-1"><a class="flex items-center gap-2 px-space-sm py-1.5 rounded text-body-sm font-body-sm text-on-surface-variant hover:bg-slate-elevated hover:text-on-surface transition-colors" data-path="system-settings" href="#"><span class="material-symbols-outlined text-base">settings</span><span>Settings</span></a><div class="px-space-sm py-1 text-label-sm font-label-sm text-outline-variant font-mono">v1.2.4-prod // US-EAST</div></div></aside><div class="pl-64"><main class="w-full pt-16 min-h-screen bg-background"><div class="flex flex-col w-full">
+<div class="px-margin py-space-md flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<!-- Top Feed Control Bar (Telemetry & Query Parameters) -->
+<header class="bg-slate-surface rounded-xl p-space-md shadow-xl flex flex-col gap-space-md">
+<!-- Upper Metainfo & Status Line -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-2 px-space-sm py-1 rounded bg-surface-container-lowest">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse shadow-[0_0_8px_#00F2FE]"></span>
+<span class="font-label-md text-label-md text-primary font-mono tracking-tight">ENDPOINT: GET /api/tech/{periodId}</span>
+</div>
+<span class="font-label-sm text-label-sm text-badge-investment bg-slate-elevated px-2 py-1 rounded">35+ Sources Live</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-lowest px-2 py-1 rounded">No Auth Required (Open API)</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-2 px-space-sm py-1 rounded bg-surface-container-lowest text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-badge-tips">schedule</span>
+<span>Refresh cycle: <span class="text-primary font-mono">23:00 CET (Berlin)</span></span>
+</div>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-slate-elevated hover:bg-surface-variant text-label-sm font-label-sm text-primary transition-all" id="toggle-live">
+<span class="material-symbols-outlined text-sm text-primary-container">sync</span>
+<span>Live Stream: ON</span>
+</button>
+</div>
+</div>
+<!-- Segment Controls: Language, Period, and Categorical Matrix -->
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
+<!-- Locales -->
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded">
+<span class="material-symbols-outlined text-sm text-outline ml-1 mr-1">translate</span>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md bg-primary-container text-on-primary-container font-semibold transition-all">EN</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">DE</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">ZH</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">FR</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">ES</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">PT</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">JA</button>
+<button class="lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all">KO</button>
+</div>
+<!-- Period Toggle Dropdown / Selector -->
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded">
+<button class="px-space-sm py-1 rounded text-label-md font-label-md bg-slate-elevated text-primary font-mono flex items-center gap-1.5 shadow-sm" id="btn-period-daily">
+<span class="material-symbols-outlined text-sm text-primary-container">calendar_today</span>
+<span>Daily: 2026-02-26</span>
+</button>
+<button class="px-space-sm py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary font-mono flex items-center gap-1.5 transition-all" id="btn-period-weekly">
+<span class="material-symbols-outlined text-sm text-badge-trends">date_range</span>
+<span>Week: 2026-kw09</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded bg-slate-elevated text-outline hover:text-primary transition-all" title="Select archive range">
+<span class="material-symbols-outlined text-sm">tune</span>
+</button>
+</div>
+</div>
+<!-- Quick Category Filters -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 scrollbar-none">
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-primary-container text-on-primary-container font-semibold transition-all">All Categories (64)</button>
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-badge-llm"></span>LLM &amp; Foundation Models
+        </button>
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-badge-investment"></span>Investments &amp; M&amp;A
+        </button>
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-badge-tips"></span>Dev Tips (Reddit / Blogs)
+        </button>
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-badge-videos"></span>YouTube Video Summaries
+        </button>
+<button class="cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-badge-trends"></span>Trending Topics (+24h)
+        </button>
+</div>
+</header>
+<!-- Hero Spotlight Section: Breaking AI Signal -->
+<section class="bg-slate-surface rounded-xl p-space-lg shadow-xl relative overflow-hidden">
+<!-- Glow Accent Background Layer -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row gap-space-lg items-start justify-between">
+<div class="flex-1 flex flex-col gap-space-md">
+<!-- Card Meta Row -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2.5 py-1 rounded bg-error-container text-error text-label-sm font-label-sm font-mono flex items-center gap-1.5 animate-pulse">
+<span class="w-2 h-2 rounded-full bg-status-impact-high"></span>HIGH IMPACT SIGNAL
+            </span>
+<span class="px-2.5 py-1 rounded bg-surface-container-lowest text-badge-tech text-label-sm font-label-sm font-mono">TechCrunch</span>
+<span class="font-label-sm text-label-sm text-outline font-mono">2026-02-26T14:30:00Z (2h ago)</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-llm text-label-sm font-label-sm font-mono">#LLM</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary text-label-sm font-label-sm font-mono">#REASONING</span>
+</div>
+<!-- Headline & Deck -->
+<div class="flex flex-col gap-space-xs">
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+              OpenAI introduces GPT-5 with multi-modal dynamic reasoning advancements &amp; 1M unified context window
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-4xl">
+              Major architectural shift integrates continuous system-2 test-time compute scaling across unified vision, audio, and code modalities. Initial autonomous benchmarks demonstrate a 24.3% reduction in hallucinations over prior frontier releases.
+            </p>
+</div>
+<!-- Key Takeaways Pill Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="p-space-sm bg-surface-container-lowest rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono">Dynamic Latent Inference</span>
+<span class="font-body-md text-body-md text-primary font-medium">Variable compute per token budget</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono">Benchmark Jump</span>
+<span class="font-body-md text-body-md text-badge-investment font-medium">94.8% on SWE-bench Verified</span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-outline uppercase font-mono">API Availability</span>
+<span class="font-body-md text-body-md text-badge-llm font-medium">Tier-4+ rollout begins today</span>
+</div>
+</div>
+<!-- Action bar -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-sm">
+<button class="px-3.5 py-1.5 rounded bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold flex items-center gap-2 hover:shadow-[0_0_12px_rgba(0,242,254,0.4)] transition-all" id="btn-toggle-json">
+<span class="material-symbols-outlined text-base">data_object</span>
+<span>View Raw JSON Schema</span>
+</button>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-elevated text-on-surface text-label-md font-label-md">
+<span class="material-symbols-outlined text-badge-videos text-base">graphic_eq</span>
+<span>3-min Neural Audio Summary</span>
+<span class="material-symbols-outlined text-base text-primary-container cursor-pointer ml-1">play_circle</span>
+</div>
+<a class="px-3 py-1.5 rounded bg-surface-container-lowest hover:bg-slate-elevated text-on-surface-variant hover:text-primary text-label-md font-label-md flex items-center gap-1.5 transition-colors" href="https://techcrunch.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-base">open_in_new</span>
+<span>Source Publication</span>
+</a>
+</div>
+</div>
+<!-- Visual Media / Architectural Thumbnail -->
+<div class="w-full lg:w-96 shrink-0 flex flex-col gap-space-sm">
+<div class="w-full h-56 rounded-xl overflow-hidden relative bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="High-tech futuristic visual representation of a complex neural network architecture cube glowing in vibrant cyan and hyper-violet with geometric data vectors, obsidian dark cybernetic background, sharp focus, technical schematic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5t3jUepZl6mV_jI85OX7gaqXnwC9hOZ8LH6TQW0iTc8kukRsD-tR4BUIH8Y7tVffXiAXZGtsNkchEO8m6Ry0NBA9MHUQEMr6xC_L0QkYZVN6RjsLsTssOyiEqy-lpG5DNZQO1g0_lJrA0nlt_PPqc_Gvvdy014ODAV8Sc9jt-tZUS8MypvouQIopJU-UHPW8qUSGwxN4zTHCe1rf_Or7JmrTNBZyrDUSFCaBRh-M"/>
+<div class="absolute bottom-2 left-2 right-2 p-2 rounded bg-slate-surface/90 backdrop-blur-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-mono">MODEL ARCH // SPEC-V5</span>
+<span class="font-label-sm text-label-sm text-badge-tech font-mono">1.2M Params/Layer</span>
+</div>
+</div>
+<!-- Sparkline Metric Visualizer -->
+<div class="p-space-sm bg-surface-container-lowest rounded flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline font-mono">FEED VELOCITY</span>
+<span class="font-headline-sm text-headline-sm text-badge-investment font-mono">+384 req/min</span>
+</div>
+<div class="w-36 h-8">
+<svg class="w-full h-full stroke-primary-container fill-none" preserveaspectratio="none" viewbox="0 0 144 32">
+<path d="M0 24 Q 24 28, 48 16 T 96 12 T 144 4" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<circle class="fill-primary-container" cx="144" cy="4" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Raw JSON Drawer (Toggleable) -->
+<div class="hidden mt-space-md pt-space-md bg-surface-container-lowest rounded-lg p-space-md font-mono text-label-sm" id="raw-json-drawer">
+<div class="flex items-center justify-between pb-2 mb-2 text-outline">
+<span class="flex items-center gap-2 text-primary font-mono">
+<span class="material-symbols-outlined text-sm">code</span>
+            API Response: /api/tech/2026-02-26/item-8491
+          </span>
+<button class="text-label-sm hover:text-primary transition-colors flex items-center gap-1" id="btn-copy-json">
+<span class="material-symbols-outlined text-sm">content_copy</span> Copy Object
+          </button>
+</div>
+<pre class="text-on-surface-variant overflow-x-auto whitespace-pre leading-relaxed"><code>{
+  "status": "success",
+  "id": "item-8491",
+  "timestamp": "2026-02-26T14:30:00Z",
+  "period": "2026-02-26",
+  "source": {
+    "name": "TechCrunch",
+    "domain": "techcrunch.com",
+    "credibility_score": 0.98
+  },
+  "title": "OpenAI introduces GPT-5 with multi-modal reasoning advancements &amp; 1M context window",
+  "category": "LLM",
+  "tags": ["Reasoning", "Multimodal", "Scaling"],
+  "impact": {
+    "level": "high",
+    "velocity_score": 9.4,
+    "confidence": 0.99
+  },
+  "locales_ready": ["en", "de", "zh", "fr", "es", "pt", "ja", "ko"],
+  "audio_summary_url": "https://api.datacubeai.space/stream/audio/summary-8491.mp3"
+}</code></pre>
+</div>
+</section>
+<!-- Main Content Area: 3-Column Stream + Right-Hand Utility Intelligence Dock -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- 8-Column / News Stream Matrix -->
+<main class="xl:col-span-8 flex flex-col gap-space-md">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-base">rss_feed</span>
+<span class="font-headline-sm text-headline-sm text-primary">Live Continuous Stream</span>
+<span class="font-label-sm text-label-sm text-outline font-mono">Showing 6 verified signals</span>
+</div>
+<div class="flex items-center gap-space-xs text-label-sm font-label-sm text-outline">
+<span>Sort:</span>
+<button class="text-primary font-medium">Impact Priority</button>
+<span>•</span>
+<button class="hover:text-primary transition-colors">Most Recent</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Card 1: Tech & Architecture (Claude 3.7) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-badge-tech">MIT Tech Review</span>
+<span>•</span>
+<span>3h ago</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-error-container text-error text-label-sm font-label-sm font-mono flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-impact-high"></span>High
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                Anthropic announces Claude 3.7 Sonnet with hybrid instantaneous and extended reasoning
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                First frontier model to allow developers granular control over deliberate thinking steps via API token budget parameters, rivaling dedicated reasoning systems without added latency on standard queries.
+              </p>
+<!-- Multilingual preview tabs -->
+<div class="p-2 bg-surface-container-lowest rounded flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-outline font-mono">Multilingual Digest:</span>
+<div class="flex items-center gap-1 font-mono">
+<button class="text-primary-container font-semibold">EN</button>
+<span class="text-outline-variant">/</span>
+<button class="text-on-surface-variant hover:text-primary">DE</button>
+<span class="text-outline-variant">/</span>
+<button class="text-on-surface-variant hover:text-primary">ZH</button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic">
+                  "API token cap exposes deliberate inference budget controls for production workloads."
+                </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t border-transparent">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-tech text-label-sm font-label-sm font-mono">/tech/architecture</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Digest</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Investment & Funding (Physical Intelligence) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-badge-investment">Hacker News</span>
+<span>•</span>
+<span>5h ago</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-investment text-label-sm font-label-sm font-mono">
+                  $400M Round
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                Physical Intelligence raises $400M Series B for universal robot foundation models
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                Valuation hits $2.4B backed by Lux Capital and OpenAI. The startup’s π0 (pi-zero) generalist model demonstrates cross-chassis dexterous manipulation tasks without teleoperation fine-tuning.
+              </p>
+<div class="p-2 bg-surface-container-lowest rounded flex items-center justify-between text-label-sm font-label-sm font-mono">
+<span class="text-outline">Lead Syndicate:</span>
+<span class="text-badge-investment">Lux, OpenAI, Thrive</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-investment text-label-sm font-label-sm font-mono">/m&amp;a/robotics</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Cap Table</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Practical Dev Tips (vLLM Latency) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-badge-tips">Reddit r/LocalLLaMA</span>
+<span>•</span>
+<span>7h ago</span>
+</div>
+<div class="flex items-center gap-1 text-badge-tips font-mono text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm">thumb_up</span>
+<span>1.4k</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                Optimizing vLLM inference throughput: 4 kernel tweaks that cut latency by 38%
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                Production-tested configurations for AWQ 4-bit quantizations on Hopper H100s. Deep dive into PagedAttention V2 block allocators and CUDA graph warmup workarounds.
+              </p>
+<div class="p-2 bg-surface-container-lowest rounded font-mono text-label-sm text-on-surface-variant">
+<code>--gpu-memory-utilization 0.95 --max-num-seqs 256</code>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-tips text-label-sm font-label-sm font-mono">/tips/dev-infra</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Code Repo</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 4: Video Summary (DeepSeek-R1) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-badge-videos">YouTube</span>
+<span>•</span>
+<span>8h ago</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-videos text-label-sm font-label-sm font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">timer</span> 18m
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                Deep Dive: How DeepSeek-R1 implements reinforcement learning with zero human feedback
+              </h3>
+<div class="flex flex-col gap-1 p-2 bg-surface-container-lowest rounded">
+<span class="font-label-sm text-label-sm text-outline font-mono">Key Takeaways &amp; Timestamps:</span>
+<ul class="text-body-sm font-body-sm text-on-surface-variant flex flex-col gap-1">
+<li class="flex items-baseline gap-2">
+<span class="text-badge-videos font-mono text-label-sm">04:12</span>
+<span>Cold-start distillation from R1-Zero base</span>
+</li>
+<li class="flex items-baseline gap-2">
+<span class="text-badge-videos font-mono text-label-sm">11:45</span>
+<span>Rule-based verifier dynamics for formal proofs</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-videos text-label-sm font-label-sm font-mono">/videos/technical</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Play Summary</span> <span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+</article>
+<!-- Card 5: Trending Topics (Autonomous Coding SWE-Bench) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-badge-trends">Ars Technica</span>
+<span>•</span>
+<span>10h ago</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-trends text-label-sm font-label-sm font-mono">
+                  Velocity: +142%
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                Autonomous Coding Agents cross 65% benchmark on SWE-bench Verified
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                Agentic workflows incorporating iterative test execution and git branch exploration establish a milestone in end-to-end repository maintenance.
+              </p>
+<!-- Progress bar representation -->
+<div class="flex flex-col gap-1 p-2 bg-surface-container-lowest rounded">
+<div class="flex justify-between text-label-sm font-label-sm font-mono">
+<span class="text-outline">SWE-bench Verified Rate</span>
+<span class="text-badge-trends font-semibold">65.2%</span>
+</div>
+<div class="w-full bg-slate-border h-1.5 rounded-full overflow-hidden">
+<div class="bg-badge-trends h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-trends text-label-sm font-label-sm font-mono">/trends/agents</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Analytics</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Card 6: M&A / Market (NVIDIA Silicon Photonics) -->
+<article class="bg-slate-surface rounded-xl p-space-md shadow-md hover:bg-slate-elevated transition-all flex flex-col justify-between gap-space-sm group">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 font-label-sm text-label-sm font-mono text-outline">
+<span class="text-primary-container">Reuters Tech</span>
+<span>•</span>
+<span>12h ago</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-badge-llm text-label-sm font-label-sm font-mono">
+                  Hardware M&amp;A
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors leading-snug">
+                NVIDIA acquires optical networking startup to accelerate NVLink 6 silicon photonics
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                Move tackles intra-cluster interconnect bandwidth bottlenecks, prepping for co-packaged optics (CPO) deployment in next-gen Rubin architecture clusters.
+              </p>
+<div class="p-2 bg-surface-container-lowest rounded flex items-center justify-between text-label-sm font-label-sm font-mono">
+<span class="text-outline">Interconnect Bandwidth:</span>
+<span class="text-primary">3.2 Tbps / Lane</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary-container text-label-sm font-label-sm font-mono">/infrastructure</span>
+<button class="text-label-sm font-label-sm text-outline group-hover:text-primary flex items-center gap-1 transition-colors">
+<span>Deal Terms</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Pagination / Stream Continuation -->
+<div class="flex items-center justify-between p-space-md bg-slate-surface rounded-xl">
+<span class="text-label-sm font-label-sm text-outline font-mono">Page 1 of 11 • 64 items synced for 2026-02-26</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 rounded bg-surface-container-lowest text-outline text-label-md font-label-md cursor-not-allowed">Previous</button>
+<button class="px-3 py-1 rounded bg-slate-elevated hover:bg-surface-variant text-primary text-label-md font-label-md transition-all">Next Batch (6-12)</button>
+</div>
+</div>
+</main>
+<!-- 4-Column / Side Intelligence Dock (API Sandbox & Sources Coverage) -->
+<aside class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- Direct API Sandbox Widget -->
+<div class="bg-slate-surface rounded-xl p-space-md shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-base">terminal</span>
+<span class="font-headline-sm text-headline-sm text-primary">API Sandbox</span>
+</div>
+<span class="font-label-sm text-label-sm text-badge-investment font-mono bg-surface-container-lowest px-2 py-0.5 rounded">HTTP 200 OK</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            DataCube AI News powers enterprise agents and automated newsletters. Query current snapshots straight from your terminal.
+          </p>
+<!-- Interactive Code Box -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-2 font-mono">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-outline">
+<div class="flex items-center gap-2">
+<span class="text-primary font-semibold">cURL</span>
+<span>Python</span>
+<span>Node.js</span>
+</div>
+<button class="hover:text-primary transition-colors flex items-center gap-1 text-label-sm" id="copy-curl-btn">
+<span class="material-symbols-outlined text-xs">copy_all</span>
+<span id="copy-text">Copy</span>
+</button>
+</div>
+<pre class="text-body-sm font-body-sm text-primary-container overflow-x-auto whitespace-pre-wrap leading-relaxed py-1"><code>curl -s https://api-production-3ee5.up.railway.app/api/tech/2026-02-26 | jq</code></pre>
+</div>
+<div class="grid grid-cols-2 gap-space-xs text-label-sm font-label-sm font-mono">
+<div class="p-2 bg-surface-container-lowest rounded flex flex-col">
+<span class="text-outline">Rate Limit</span>
+<span class="text-primary">60 req/min</span>
+</div>
+<div class="p-2 bg-surface-container-lowest rounded flex flex-col">
+<span class="text-outline">Payload Avg</span>
+<span class="text-primary">14.2 KB</span>
+</div>
+</div>
+</div>
+<!-- Curated Sources Coverage Matrix -->
+<div class="bg-slate-surface rounded-xl p-space-md shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-badge-trends text-base">hub</span>
+<span class="font-headline-sm text-headline-sm text-primary">Source Engine (35+)</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-mono">100% Up</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Source Row 1 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest text-label-sm font-label-sm font-mono">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-status-impact-low"></span>
+<span class="text-on-surface">TechCrunch &amp; VentureBeat</span>
+</div>
+<span class="text-outline">RSS / Scrape</span>
+</div>
+<!-- Source Row 2 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest text-label-sm font-label-sm font-mono">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-status-impact-low"></span>
+<span class="text-on-surface">Hacker News &amp; Reddit</span>
+</div>
+<span class="text-outline">Official API</span>
+</div>
+<!-- Source Row 3 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest text-label-sm font-label-sm font-mono">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-status-impact-low"></span>
+<span class="text-on-surface">arXiv cs.AI / cs.CL</span>
+</div>
+<span class="text-outline">OAI-PMH</span>
+</div>
+<!-- Source Row 4 -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest text-label-sm font-label-sm font-mono">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-status-impact-low"></span>
+<span class="text-on-surface">YouTube AI Curators</span>
+</div>
+<span class="text-outline">Transcript Gen</span>
+</div>
+</div>
+<!-- Stock Data Notice Alert -->
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-status-impact-medium text-base shrink-0 mt-0.5">info</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-status-impact-medium font-mono font-medium">Stock API Notice (HTTP 410)</span>
+<p class="font-body-sm text-body-sm text-outline">
+                Financial ticker endpoints paused pending licensing review. Market indices will resume with v1.3.
+              </p>
+</div>
+</div>
+</div>
+<!-- Export & Webhook Integration Box -->
+<div class="bg-slate-surface rounded-xl p-space-md shadow-xl flex flex-col gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary">Feeds Syndication</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Export current feed filtered for 2026-02-26 to external data sinks.
+          </p>
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<button class="px-3 py-2 rounded bg-surface-container-lowest hover:bg-slate-elevated text-primary text-label-sm font-label-sm font-mono flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">rss_feed</span>
+<span>RSS / XML</span>
+</button>
+<button class="px-3 py-2 rounded bg-surface-container-lowest hover:bg-slate-elevated text-primary text-label-sm font-label-sm font-mono flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">webhook</span>
+<span>Webhooks</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions for the News Feed UI
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Raw JSON Drawer Toggle
+    const jsonBtn = document.getElementById('btn-toggle-json');
+    const jsonDrawer = document.getElementById('raw-json-drawer');
+    if (jsonBtn && jsonDrawer) {
+      jsonBtn.addEventListener('click', () => {
+        jsonDrawer.classList.toggle('hidden');
+      });
+    }
+
+    // 2. Copy cURL helper
+    const copyCurlBtn = document.getElementById('copy-curl-btn');
+    const copyText = document.getElementById('copy-text');
+    if (copyCurlBtn && copyText) {
+      copyCurlBtn.addEventListener('click', () => {
+        const cmd = 'curl -s https://api-production-3ee5.up.railway.app/api/tech/2026-02-26 | jq';
+        navigator.clipboard.writeText(cmd).then(() => {
+          copyText.textContent = 'Copied!';
+          setTimeout(() => { copyText.textContent = 'Copy'; }, 2000);
+        });
+      });
+    }
+
+    // 3. Category Pill Active State
+    const pills = document.querySelectorAll('.cat-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => {
+          p.className = 'cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-slate-elevated transition-all flex items-center gap-1.5';
+        });
+        pill.className = 'cat-pill shrink-0 px-3 py-1 rounded text-label-md font-label-md bg-primary-container text-on-primary-container font-semibold transition-all flex items-center gap-1.5';
+      });
+    });
+
+    // 4. Language Selector Active State
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langBtns.forEach(b => {
+          b.className = 'lang-btn px-2.5 py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary transition-all';
+        });
+        btn.className = 'lang-btn px-2.5 py-1 rounded text-label-md font-label-md bg-primary-container text-on-primary-container font-semibold transition-all';
+      });
+    });
+
+    // 5. Period Toggle
+    const dailyBtn = document.getElementById('btn-period-daily');
+    const weeklyBtn = document.getElementById('btn-period-weekly');
+    if (dailyBtn && weeklyBtn) {
+      dailyBtn.addEventListener('click', () => {
+        dailyBtn.className = 'px-space-sm py-1 rounded text-label-md font-label-md bg-slate-elevated text-primary font-mono flex items-center gap-1.5 shadow-sm';
+        weeklyBtn.className = 'px-space-sm py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary font-mono flex items-center gap-1.5 transition-all';
+      });
+      weeklyBtn.addEventListener('click', () => {
+        weeklyBtn.className = 'px-space-sm py-1 rounded text-label-md font-label-md bg-slate-elevated text-primary font-mono flex items-center gap-1.5 shadow-sm';
+        dailyBtn.className = 'px-space-sm py-1 rounded text-label-md font-label-md text-on-surface-variant hover:text-primary font-mono flex items-center gap-1.5 transition-all';
+      });
+    }
+  });
+</script></main></div></body></html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Slate Intelligence — Data Cube AI News Feed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- ══════════════ TOP CONTROL BAR ══════════════ -->
+    <header class="control-bar" id="control-bar">
+      <div class="bar-row bar-row--meta">
+        <div class="bar-group">
+          <div class="endpoint-pill" id="endpoint-pill">
+            <span class="pulse-dot"></span>
+            <span class="mono" id="endpoint-label">ENDPOINT: GET /api/weeks</span>
+          </div>
+          <span class="chip chip--ok mono" id="sources-chip">35+ SOURCES</span>
+          <span class="chip mono">NO AUTH REQUIRED (OPEN API)</span>
+        </div>
+        <div class="bar-group">
+          <div class="chip chip--ghost">
+            <span class="material-symbols-outlined xs amber">schedule</span>
+            <span>Refresh cycle: <span class="mono cyan">23:00 CET (Berlin)</span></span>
+          </div>
+          <div class="chip chip--ghost" id="telemetry-chip">
+            <span class="material-symbols-outlined xs cyan">bolt</span>
+            <span class="mono" id="telemetry-text">linking…</span>
+          </div>
+          <button class="btn btn--ghost mono" id="btn-live" aria-pressed="true">
+            <span class="material-symbols-outlined xs cyan">sync</span>
+            <span id="live-label">Live Stream: ON</span>
+            <span class="mono dim" id="live-countdown"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bar-row bar-row--controls">
+        <!-- Locale switcher -->
+        <div class="segmented" role="group" aria-label="Locale">
+          <span class="material-symbols-outlined sm dim seg-icon">translate</span>
+          <div class="lang-switch" id="lang-switch"></div>
+        </div>
+
+        <!-- Period selector -->
+        <div class="bar-group">
+          <div class="segmented">
+            <button class="seg-btn mono active" id="btn-period-day" data-period-type="day">
+              <span class="material-symbols-outlined xs cyan">calendar_today</span>
+              <span id="label-period-day">Daily: —</span>
+            </button>
+            <button class="seg-btn mono" id="btn-period-week" data-period-type="week">
+              <span class="material-symbols-outlined xs violet">date_range</span>
+              <span id="label-period-week">Week: —</span>
+            </button>
+            <button class="seg-icon-btn" id="btn-archive" title="Browse period archive" aria-label="Browse period archive">
+              <span class="material-symbols-outlined sm">tune</span>
+            </button>
+          </div>
+          <span class="mono dim period-id" id="period-id">&mdash;</span>
+        </div>
+      </div>
+
+      <!-- Category / endpoint chips -->
+      <div class="bar-row bar-row--chips">
+        <div class="chip-row" id="kind-chips"></div>
+        <div class="bar-group">
+          <label class="search-box">
+            <span class="material-symbols-outlined sm dim">search</span>
+            <input type="search" id="search-input" placeholder="Filter signals, sources, companies…" autocomplete="off" spellcheck="false" />
+          </label>
+          <button class="btn btn--ghost mono" id="btn-refresh">
+            <span class="material-symbols-outlined xs cyan">refresh</span>
+            <span>Refetch</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════════ HERO SPOTLIGHT ══════════════ -->
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-body" id="hero-body">
+        <div class="skeleton-line w-40"></div>
+        <div class="skeleton-line w-90 h-lg"></div>
+        <div class="skeleton-line w-70"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════ MAIN GRID ══════════════ -->
+    <div class="content-grid">
+      <!-- Feed stream -->
+      <main class="stream">
+        <div class="stream-head">
+          <div class="stream-title">
+            <span class="material-symbols-outlined cyan">rss_feed</span>
+            <h2>Signal Stream</h2>
+            <span class="mono dim" id="stream-count">&mdash;</span>
+          </div>
+          <div class="sort-switch" role="group" aria-label="Sort">
+            <span class="mono dim">Sort:</span>
+            <button class="sort-btn active mono" data-sort="impact">Impact Priority</button>
+            <span class="dim">&bull;</span>
+            <button class="sort-btn mono" data-sort="recent">Most Recent</button>
+          </div>
+        </div>
+
+        <div id="feed-grid" class="feed-grid"></div>
+
+        <div class="pager" id="pager">
+          <span class="mono dim" id="pager-label">&mdash;</span>
+          <div class="pager-buttons">
+            <button class="btn btn--ghost mono" id="btn-prev">Previous</button>
+            <button class="btn btn--ghost mono" id="btn-next">Next Batch</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Intelligence dock -->
+      <aside class="dock">
+        <!-- API sandbox -->
+        <section class="panel">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="material-symbols-outlined cyan">terminal</span>
+              <h3>API Sandbox</h3>
+            </div>
+            <span class="status-badge mono" id="sandbox-status">HTTP —</span>
+          </div>
+          <p class="panel-copy">Live query for the current selection. Copy it straight into your terminal.</p>
+          <div class="code-box">
+            <div class="code-box-head">
+              <div class="code-tabs" id="code-tabs">
+                <button class="code-tab mono active" data-tab="curl">cURL</button>
+                <button class="code-tab mono" data-tab="python">Python</button>
+                <button class="code-tab mono" data-tab="node">Node.js</button>
+              </div>
+              <button class="copy-btn mono" id="btn-copy-code">
+                <span class="material-symbols-outlined xs">content_copy</span>
+                <span id="copy-code-label">Copy</span>
+              </button>
+            </div>
+            <pre class="code-block mono" id="code-block"></pre>
+          </div>
+          <div class="metric-grid mono">
+            <div class="metric"><span class="dim">Latency</span><span class="cyan" id="metric-latency">—</span></div>
+            <div class="metric"><span class="dim">Payload</span><span class="cyan" id="metric-bytes">—</span></div>
+            <div class="metric"><span class="dim">Cache Age</span><span class="cyan" id="metric-cache">—</span></div>
+            <div class="metric"><span class="dim">HTTP</span><span class="green" id="metric-status">—</span></div>
+          </div>
+        </section>
+
+        <!-- Source engine -->
+        <section class="panel">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="material-symbols-outlined violet">hub</span>
+              <h3>Source Engine</h3>
+            </div>
+            <span class="mono dim" id="source-count">—</span>
+          </div>
+          <div class="source-list" id="source-list"></div>
+          <div class="notice">
+            <span class="material-symbols-outlined sm amber">info</span>
+            <div>
+              <span class="mono amber strong">Stock API Notice (HTTP 410)</span>
+              <p>Financial ticker endpoints are paused pending licensing review. All five news feeds are unaffected.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Editorial desk (trends only) -->
+        <section class="panel panel--editorial" id="editorial-panel" hidden>
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="material-symbols-outlined pink">psychology</span>
+              <h3>Editorial Desk</h3>
+            </div>
+            <span class="mono dim" id="editorial-locale">EN</span>
+          </div>
+          <div class="editorial-list" id="editorial-list"></div>
+        </section>
+
+        <!-- Syndication -->
+        <section class="panel">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="material-symbols-outlined sky">output</span>
+              <h3>Syndication</h3>
+            </div>
+          </div>
+          <p class="panel-copy">Export the current view. Raw payloads are multilingual — locale applied client-side.</p>
+          <div class="synd-grid">
+            <button class="btn btn--soft mono" id="btn-export-json">
+              <span class="material-symbols-outlined xs">data_object</span>
+              <span>JSON</span>
+            </button>
+            <button class="btn btn--soft mono" id="btn-export-csv">
+              <span class="material-symbols-outlined xs">table_view</span>
+              <span>CSV</span>
+            </button>
+            <button class="btn btn--soft mono" id="btn-export-md">
+              <span class="material-symbols-outlined xs">article</span>
+              <span>Markdown</span>
+            </button>
+            <button class="btn btn--soft mono" id="btn-copy-feed">
+              <span class="material-symbols-outlined xs">link</span>
+              <span>Copy URL</span>
+            </button>
+          </div>
+          <div class="export-status mono" id="export-status"></div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Raw JSON drawer -->
+    <section class="drawer" id="json-drawer" hidden>
+      <div class="drawer-head">
+        <span class="mono cyan">
+          <span class="material-symbols-outlined xs">code</span>
+          API Response: <span id="drawer-url">—</span>
+        </span>
+        <div class="drawer-actions">
+          <button class="btn btn--ghost mono" id="btn-copy-json">
+            <span class="material-symbols-outlined xs">content_copy</span>
+            <span>Copy Object</span>
+          </button>
+          <button class="seg-icon-btn" id="btn-close-json" aria-label="Close raw JSON">
+            <span class="material-symbols-outlined sm">close</span>
+          </button>
+        </div>
+      </div>
+      <pre class="drawer-body mono" id="json-body"></pre>
+    </section>
+
+    <!-- Archive flyout -->
+    <div class="flyout" id="archive-flyout" hidden>
+      <div class="flyout-head">
+        <span class="mono cyan">PERIOD ARCHIVE</span>
+        <button class="seg-icon-btn" id="btn-close-archive" aria-label="Close archive">
+          <span class="material-symbols-outlined sm">close</span>
+        </button>
+      </div>
+      <div class="flyout-body" id="archive-body"></div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
