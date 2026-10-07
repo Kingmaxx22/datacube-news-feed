@@ -217,24 +217,6 @@ fn invalidate_cache(state: State<'_, ApiState>) -> usize {
     }
 }
 
-#[tauri::command]
-fn cache_status(state: State<'_, ApiState>) -> Vec<String> {
-    match state.cache.lock() {
-        Ok(cache) => cache
-            .iter()
-            .map(|(url, entry)| {
-                format!(
-                    "{} \u{2022} {} ms ago \u{2022} {} KB",
-                    url,
-                    entry.fetched_at.elapsed().as_millis(),
-                    entry.bytes / 1024
-                )
-            })
-            .collect(),
-        Err(_) => Vec::new(),
-    }
-}
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -246,8 +228,7 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             fetch_weeks,
             fetch_feed,
-            invalidate_cache,
-            cache_status
+            invalidate_cache
         ])
         .run(tauri::generate_context!())
         .expect("error while running Cyber Slate Intelligence");

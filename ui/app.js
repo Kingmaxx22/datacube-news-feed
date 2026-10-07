@@ -1133,14 +1133,17 @@ function videoStats(item) {
   row.appendChild(el("span", "k", "Engagement"));
   row.appendChild(el("span", "v", `${formatCount(item.extra.viewCount)} views · ${formatCount(item.extra.likeCount)} likes`));
   box.appendChild(row);
+
+  // like-to-view ratio as a signal-strength meter
+  const views = Number(item.extra.viewCount) || 0;
+  const likes = Number(item.extra.likeCount) || 0;
+  const ratio = views > 0 ? Math.min(1, likes / views) : 0;
   const bar = el("div", "meter");
+  bar.title = `${(ratio * 100).toFixed(2)}% like ratio`;
   const fill = el("i");
-  const top = Math.max(Number(item.extra.viewCount) || 0, 1);
-  fill.style.width = "100%";
-  fill.style.opacity = "0.9";
+  fill.style.width = `${Math.max(2, ratio * 100)}%`;
   bar.appendChild(fill);
   box.appendChild(bar);
-  void top;
   return box;
 }
 
@@ -1169,7 +1172,7 @@ function renderDock() {
   $("metric-cache").textContent = env ? (env.cached ? `${Math.round(env.cache_age_ms / 1000)}s ago` : "fresh") : "—";
   $("metric-status").textContent = env ? env.status : "—";
 
-  renderCodeBlock(env);
+  renderCodeBlock();
   renderSources();
   renderEditorial();
 
@@ -1181,20 +1184,29 @@ function renderDock() {
   }
 }
 
-function codeSamples(env) {
+function codeSamples() {
   const kinds = state.kind === "all" ? FEEDS.map((f) => f.kind) : [state.kind];
-  const target = kinds.length === 1 ? `${API_BASE}${FEED_BY_KIND[kinds[0]].endpoint}/${state.period}` : `${API_BASE}/api/{tech|investment|tips|videos|trends}/${state.period}`;
   const url = `${API_BASE}${FEED_BY_KIND[kinds[0]].endpoint}/${state.period}`;
+  const locale = state.locale;
+  // the aggregate view spans several endpoints, so show one call per feed
+  const urls = kinds.map((k) => `${API_BASE}${FEED_BY_KIND[k].endpoint}/${state.period}`);
+  const multi = kinds.length > 1;
+
   return {
-    curl: `curl -s "${url}" | jq '.${state.locale}[0]'`,
-    python: `import json, urllib.request\n\nwith urllib.request.urlopen("${url}") as r:\n    data = json.load(r)\n\nfor item in data["${state.locale}"]:\n    print(item["content"])`,
-    node: `const res = await fetch("${url}");\nconst data = await res.json();\n\nfor (const item of data.${state.locale}) {\n  console.log(item.content);\n}`,
-    target,
+    curl: multi
+      ? urls.map((u) => `curl -s "${u}" | jq '.${locale}[0]'`).join("\n")
+      : `curl -s "${url}" | jq '.${locale}[0]'`,
+    python: multi
+      ? `import json, urllib.request\n\nfor path in ${JSON.stringify(urls, null, 2).replace(/\n/g, "\n")}:\n    with urllib.request.urlopen(path) as r:\n        data = json.load(r)\n    for item in data["${locale}"]:\n        print(item)`
+      : `import json, urllib.request\n\nwith urllib.request.urlopen("${url}") as r:\n    data = json.load(r)\n\nfor item in data["${locale}"]:\n    print(item["content"])`,
+    node: multi
+      ? `const feeds = ${JSON.stringify(urls)};\n\nfor (const url of feeds) {\n  const data = await (await fetch(url)).json();\n  for (const item of data.${locale}) console.log(item);\n}`
+      : `const res = await fetch("${url}");\nconst data = await res.json();\n\nfor (const item of data.${locale}) {\n  console.log(item.content);\n}`,
   };
 }
 
-function renderCodeBlock(env) {
-  const samples = codeSamples(env);
+function renderCodeBlock() {
+  const samples = codeSamples();
   $("code-block").textContent = samples[state.codeTab] ?? samples.curl;
 }
 
@@ -1519,7 +1531,7 @@ function wire() {
     if (!tab) return;
     state.codeTab = tab.dataset.tab;
     document.querySelectorAll(".code-tab").forEach((t) => t.classList.toggle("active", t === tab));
-    renderCodeBlock(activeEnvelope());
+    renderCodeBlock();
   });
 
   $("btn-export-json").addEventListener("click", exportJson);
